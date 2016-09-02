@@ -56,10 +56,10 @@ func GetChannelInfo(token string, channelID string) (*Channel, error) {
 
 	// get the response from HTTP body
 	body, err := ioutil.ReadAll(resp.Body)
-	resp.Body.Close()
 	if err != nil {
 		return nil, fmt.Errorf("Error received trying to close the channel info body: %s", err)
 	}
+	defer resp.Body.Close()
 
 	// unmarshal response
 	var channelInfo Channel
